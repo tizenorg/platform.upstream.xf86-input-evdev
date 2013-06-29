@@ -7,6 +7,7 @@ Url:            http://xorg.freedesktop.org/
 Group:          System/X11/Servers/XF86_4
 Source0:        http://xorg.freedesktop.org/releases/individual/driver/%{name}-%{version}.tar.bz2
 Source1:        evdev.conf
+Source1001: 	xf86-input-evdev.manifest
 BuildRequires:  pkg-config
 BuildRequires:  pkgconfig(inputproto)
 BuildRequires:  pkgconfig(libudev)
@@ -34,6 +35,7 @@ including most mice, keyboards, tablets and touchscreens.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 %configure
@@ -58,6 +60,7 @@ udevadm trigger --subsystem-match=input --action=change
 exit 0
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %doc COPYING
 %{_sysconfdir}/X11/xorg.conf.d/10-evdev.conf
@@ -65,6 +68,7 @@ exit 0
 %{_libdir}/xorg/modules/input/evdev_drv.so
 
 %files devel
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %{_includedir}/xorg/evdev-properties.h
 %{_libdir}/pkgconfig/xorg-evdev.pc
