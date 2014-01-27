@@ -1,3 +1,5 @@
+%bcond_with x
+
 Name:           xf86-input-evdev
 Version:        2.7.3
 Release:        0
@@ -17,6 +19,10 @@ BuildRequires:  pkgconfig(xorg-macros) >= 1.8
 BuildRequires:  pkgconfig(xorg-server)
 BuildRequires:  pkgconfig(xproto)
 Requires:       udev
+
+%if !%{with x}
+ExclusiveArch:
+%endif
 
 %description
 evdev is an Xorg input driver for Linux's generic event devices. It
