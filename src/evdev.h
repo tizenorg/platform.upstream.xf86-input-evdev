@@ -145,6 +145,15 @@ typedef struct {
 #endif
 } EventQueueRec, *EventQueuePtr;
 
+#ifdef _F_REMAP_KEYS_
+typedef struct {
+    uint8_t cd[256];
+} EvdevKeyRemapSlice;
+typedef struct {
+    EvdevKeyRemapSlice* sl[256];
+} EvdevKeyRemap, *EvdevKeyRemapPtr;
+#endif //_F_REMAP_KEYS_
+
 typedef struct {
     unsigned short id_vendor;
     unsigned short id_product;
@@ -227,6 +236,10 @@ typedef struct {
     } calibration;
 
     unsigned char btnmap[32];           /* config-file specified button mapping */
+
+#ifdef _F_REMAP_KEYS_
+    EvdevKeyRemapPtr keyremap;
+#endif //_F_REMAP_KEYS_
 
     int reopen_attempts; /* max attempts to re-open after read failure */
     int reopen_left;     /* number of attempts left to re-open the device */

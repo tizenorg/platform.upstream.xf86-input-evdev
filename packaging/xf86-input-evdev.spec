@@ -44,6 +44,7 @@ including most mice, keyboards, tablets and touchscreens.
 cp %{SOURCE1001} .
 
 %build
+CFLAGS="$CFLAGS -D_F_REMAP_KEYS_ "
 %configure
 make %{?_smp_mflags}
 
